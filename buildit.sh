@@ -27,9 +27,9 @@ fi
 mkdir $BUILD_PACKAGE_NAME
 pushd $BUILD_PACKAGE_NAME
 
-./configure
+../configure
 if [ $? -ne 0 ]; then
-    echo "Failed ./configure"
+    echo "Failed ../configure"
     exit -1
 fi
 
