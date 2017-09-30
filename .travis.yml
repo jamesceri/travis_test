@@ -1,1 +1,6 @@
 language: c
+
+script:
+  - aclocal
+  - autoconf
+  - automake --add-missing
