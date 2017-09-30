@@ -17,7 +17,7 @@ deploy:
   provider: releases
   api_key:
     secure: Psl/9ZGbDG2lE3Il19GOcwKmq4WnGnwLJmZ/z5aFmF2uSftxeXFKSgobU/Ki4aPA7sPqUrvnQwrEjq/O/A0VS/KqKQuOm1HHsg4AkRpj9mqToBS5PqAn7FlXdsPaJh2XwYOG1u7o52lHkrMV68i24O9AY1HVP3HNwitZUn/mPZropt32F2I/Dmx99vUl44hUphZaUj5QeKx2TRs8sGlLbz0+zf4IV4rJLLOPmAyDSfMASIh+nW9pG3bAsvxkZkFqySiOMxBzoFujOWPYRbjB8E8Bzl7dPk3k1GjexySidgHxrzWxlwNPOpJpfbE09LujUX96ORsN172TxSJu0jxIo4SVMNwSxn2by207mAv+vmLNQUGTpt9MOZmPGKZCdJisLDQtux/iITyDRYH5Tuq18HKilCdlUIsnfSaBxTR5R7y0+5Ep2zsQ9GOSfp5sZS1meAC2S0pCJuy9/Rqm+uuHPCiEAk7uwgAABDXauTpboW6yXdIBPLLwlv8fcoC7uRmlwPBJ96XWE8d2upzwOJxJSX24Vv0LPpwiySfbjDjqGq9nmvOU/Nh00Ewtd03N+Se1uu4wPPVd6kOxQWuwnyZCOuba9Clc9FEUGifYZKiCfL3/NdAItLC6ckJb+Bs/GyTyYtEBjp02vO6ig86u516f55RdeayLJCtBladg1Z7sG0Y=
-  file: $BUILD_PACKAGE_NAME_TGZ
+  file: "${BUILD_PACKAGE_NAME_TGZ}"
   skip_cleanup: true
   on:
     repo: jamesceri/travis_test
