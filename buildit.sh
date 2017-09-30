@@ -27,7 +27,7 @@ fi
 mkdir $BUILD_PACKAGE_NAME
 pushd $BUILD_PACKAGE_NAME
 
-../configure
+../configure --host=arm-linux-gnueabi
 if [ $? -ne 0 ]; then
     echo "Failed ../configure"
     exit -1
