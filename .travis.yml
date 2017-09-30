@@ -1,5 +1,8 @@
 language: c
 
+apt:
+  - cmake
+
 script:
   - aclocal
   - autoconf
