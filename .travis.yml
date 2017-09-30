@@ -10,7 +10,8 @@ before_script:
   - export BUILD_PACKAGE_NAME_TGZ=BUILD_PACKAGE_NAME.tgz
 
 script:
-  - "sudo ./buildit.sh"
+  - "ls -l"
+  - "./buildit.sh"
 
 deploy:
   provider: releases
