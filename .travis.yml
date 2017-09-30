@@ -7,7 +7,7 @@ before_script:
     libglib2.0-dev libjson-glib-dev cmake
   - export BUILD_RELEASE_VERSION=`git describe --tags`
   - export BUILD_PACKAGE_NAME=helloworld-$BUILD_RELEASE_VERSION
-  - export BUILD_PACKAGE_NAME_TGZ=BUILD_PACKAGE_NAME.tgz
+  - export BUILD_PACKAGE_NAME_TGZ=$BUILD_PACKAGE_NAME.tgz
 
 script:
   - "ls -l"
