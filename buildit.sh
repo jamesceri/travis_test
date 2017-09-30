@@ -27,7 +27,7 @@ fi
 mkdir $BUILD_PACKAGE_NAME
 pushd $BUILD_PACKAGE_NAME
 
-CC=arm-linux-gnueabi ../configure --host=arm-linux-gnueabi --prefix=${CSTOOL_DIR}/linux_arm_tool 
+CC=gcc-arm-linux-gnueabihf ../configure --host=gcc-arm-linux-gnueabihf --prefix=${CSTOOL_DIR}/linux_arm_tool 
 if [ $? -ne 0 ]; then
     echo "Failed ../configure"
     exit -1
