@@ -27,7 +27,7 @@ fi
 mkdir $BUILD_PACKAGE_NAME
 pushd $BUILD_PACKAGE_NAME
 
-../configure --host=arm-linux-gnueabi --prefix=${CSTOOL_DIR}/linux_arm_tool 
+CC=arm-linux-gnueabi gcc ../configure --host=arm-linux-gnueabi --prefix=${CSTOOL_DIR}/linux_arm_tool 
 if [ $? -ne 0 ]; then
     echo "Failed ../configure"
     exit -1
@@ -38,6 +38,8 @@ if [ $? -ne 0 ]; then
     echo "Failed make"
     exit -1
 fi
+
+file helloworld
 
 popd
 
