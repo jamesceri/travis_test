@@ -1,5 +1,14 @@
 language: c
 
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      env:
+        - DEPLOY="true"
+        - ARCH="armv7"
+
 before_script:
   - sudo apt update -qq
   - sudo apt install -y -qq git
