@@ -14,19 +14,32 @@ function setup_toolchain() {
     popd
     export PATH=$PATH:$PWD/rpi/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
     echo $PATH
-    gcc -v
+    arm-linux-gnueabihf-gcc -v
 }
 
 function build_wiringpi() {
     echo "##############################"
     echo "#### wiringpi             ####"
     echo "##############################"
-    rm -rf wiringPi
-    git clone git://git.drogon.net/wiringPi
-    pushd wiringPi
-    git pull origin
+#    rm -rf wiringPi
+#    git clone git://git.drogon.net/wiringPi
+#    pushd wiringPi
+#    git pull origin
 
+#    ./build clean
+
+    if [ ! -f "wiringPi.tar.gz" ]; then
+        wget -nv https://www.dropbox.com/s/yvhrs9n345ppdvs/wiringPi.tar.gz?dl=0 -O wiringPi.tar.gz
+        tar -zxf wiringPi.tar.gz
+    fi
+
+    pushd wiringPi
     ./build
+    echo $PWD
+    sudo rm /usr/lib/libwiringPi.so*
+    sudo rm /usr/local/lib/libwiringPi.so*
+    sudo cp wiringPi/libwiringPi.so.2.44 /usr/local/lib/
+    sudo ln -s /usr/local/lib/libwiringPi.so.2.44 /usr/local/lib/libwiringPi.so
     if [ $? -ne 0 ]; then
         echo "Failed to build wiringPi"
         popd
@@ -79,7 +92,6 @@ function build_app() {
     echo "##############################"
     echo "#### build_app            ####"
     echo "##############################"
-    setup_toolchain
     autoconfig_tools
 
     make
@@ -139,6 +151,7 @@ function reset_gcc() {
 }
 
 # change_gcc
+setup_toolchain
 build_wiringpi
 build_app
 # reset_gcc
