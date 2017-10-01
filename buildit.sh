@@ -151,9 +151,9 @@ function reset_gcc() {
  reset_gpp
 }
 
-# change_gcc
+change_gcc
 setup_toolchain
 build_wiringpi
 build_app
-# reset_gcc
+reset_gcc
 cleanup
