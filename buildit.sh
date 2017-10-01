@@ -14,7 +14,25 @@ function setup_toolchain() {
     popd
     export PATH=$PATH:$PWD/rpi/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
     echo $PATH
-    arm-linux-gnueabihf-gcc -v
+    gcc -v
+}
+
+function build_wiringpi() {
+    echo "##############################"
+    echo "#### wiringpi             ####"
+    echo "##############################"
+    rm -rf wiringPi
+    git clone git://git.drogon.net/wiringPi
+    pushd wiringPi
+    git pull origin
+
+    ./build
+    if [ $? -ne 0 ]; then
+        echo "Failed to build wiringPi"
+        popd
+        exit -1
+    fi
+    popd
 }
 
 function autoconfig_tools() {
@@ -76,10 +94,52 @@ function build_app() {
 }
 
 function cleanup() {
-    rm -rf rpi autom4te.cache
+    echo "##############################"
+    echo "#### cleanup              ####"
+    echo "##############################"
+    rm -rf autom4te.cache
     rm Makefile.in aclocal.m4 compile configure depcomp install-sh missing
     rm -rf $BUILD_PACKAGE_NAME
 }
 
+function change_gpp() {
+    gpp_path=`which g++`
+    gpp_location=`which g++ | sed 's/\(.*\)\/.*/\1/'`
+    gpp_orig_version=`ls -l $gpp_path | cut -f2 -d'>' | tr -d ' '`
+    echo "gpp_path=$gpp_path"
+    echo "gpp_location=$gpp_location"
+    echo "gpp_orig_version=$gpp_orig_version"
+
+    sudo rm $gpp_path
+    sudo ln -s $PWD/rpi/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-g++ $gpp_path
+}
+function change_gcc() {
+    gcc_path=`which gcc`
+    gcc_location=`which gcc | sed 's/\(.*\)\/.*/\1/'`
+    gcc_orig_version=`ls -l $gcc_path | cut -f2 -d'>' | tr -d ' '`
+    echo "gcc_path=$gcc_path"
+    echo "gcc_location=$gcc_location"
+    echo "gcc_orig_version=$gcc_orig_version"
+
+    sudo rm $gcc_path
+    sudo ln -s $PWD/rpi/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc $gcc_path
+
+    change_gpp
+}
+
+function reset_gpp() {
+ sudo rm $gpp_path
+ sudo ln -s $gpp_orig_version $gpp_path
+}
+
+function reset_gcc() {
+ sudo rm $gcc_path
+ sudo ln -s $gcc_orig_version $gcc_path
+ reset_gpp
+}
+
+# change_gcc
+build_wiringpi
 build_app
+# reset_gcc
 cleanup
