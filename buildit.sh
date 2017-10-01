@@ -40,6 +40,7 @@ function build_wiringpi() {
     sudo rm /usr/local/lib/libwiringPi.so*
     sudo cp wiringPi/libwiringPi.so.2.44 /usr/local/lib/
     sudo ln -s /usr/local/lib/libwiringPi.so.2.44 /usr/local/lib/libwiringPi.so
+    ls -l /usr/local/lib/libwiring*
     if [ $? -ne 0 ]; then
         echo "Failed to build wiringPi"
         popd
