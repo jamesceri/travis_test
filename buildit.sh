@@ -8,8 +8,8 @@ function setup_toolchain() {
     pushd rpi
 #    git clone git://github.com/raspberrypi/tools.git
     if [ ! -f "gcc-linaro-arm-linux-gnueabihf-raspbian-x64.tar.gz" ]; then
-        wget https://www.dropbox.com/s/pwgtvpvlakjqpi7/gcc-linaro-arm-linux-gnueabihf-raspbian-x64.tar.gz?dl=0 -O gcc-linaro-arm-linux-gnueabihf-raspbian-x64.tar.gz
-        tar -zxvf gcc-linaro-arm-linux-gnueabihf-raspbian-x64.tar.gz
+        wget -nv https://www.dropbox.com/s/pwgtvpvlakjqpi7/gcc-linaro-arm-linux-gnueabihf-raspbian-x64.tar.gz?dl=0 -O gcc-linaro-arm-linux-gnueabihf-raspbian-x64.tar.gz
+        tar -zxf gcc-linaro-arm-linux-gnueabihf-raspbian-x64.tar.gz
     fi
     popd
     export PATH=$PATH:$PWD/rpi/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
@@ -72,7 +72,7 @@ function build_app() {
 
     file helloworld
     popd
-    tar -zcvf $BUILD_PACKAGE_NAME.tgz $BUILD_PACKAGE_NAME
+    tar -zcf $BUILD_PACKAGE_NAME.tgz $BUILD_PACKAGE_NAME
 }
 
 function cleanup() {

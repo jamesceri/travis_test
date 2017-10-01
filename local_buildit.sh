@@ -8,4 +8,4 @@ export BUILD_PACKAGE_NAME_TGZ=$BUILD_PACKAGE_NAME.tgz
 
 source "./buildit.sh"
 
-rm -rf tgz
+rm -rf hello*.tgz
